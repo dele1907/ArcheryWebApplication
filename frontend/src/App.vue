@@ -1,11 +1,21 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+import DashboardPage, {type Archer} from "@/components/DashboardPage.vue";
+
+const URL = 'http://localhost:7070/archers'
+
+const getAllArchers = async (): Promise<Array<Archer>> => {
+  const response = await fetch(URL);
+
+  return await response.json();
+}
+
+
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <DashboardPage :onGetAllArchers="getAllArchers" />
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>
