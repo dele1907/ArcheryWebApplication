@@ -1,13 +1,24 @@
 package de.dele1907;
 
+import de.dele1907.Controller.ArcherController;
+import de.dele1907.Service.ArcherService;
+import io.javalin.Javalin;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public static void main(String[] args) {
+        var app = Javalin.create(config -> {
+            config.bundledPlugins.enableCors(cors -> {
+                cors.addRule(rule -> {
+                    rule.allowHost("http://localhost:5173");
+                });
+            });
+        }).start(7070);
+
+        new ArcherController(new ArcherService()).registerRoutes(app);
     }
 }
