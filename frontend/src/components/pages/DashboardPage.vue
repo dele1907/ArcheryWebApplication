@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import HeaderBar from "@/components/HeaderBar.vue";
 
 export type Archer = {
   "name": string,
@@ -21,9 +22,13 @@ const onGetAllArchers = async () => {
 </script>
 
 <template>
-  <div data-testid="dashboard-page" class="dashboard-page">
-    <h1>Dashboard</h1>
+  <div data-testid="dashboard-page" class="page">
+    <div class="page-header">
+        <HeaderBar/>
+    </div>
+
     <p>Welcome to the Archery Tournament Dashboard!</p>
+
     <button @click=onGetAllArchers >Get All Archers</button>
 
     <div class="archers-list">

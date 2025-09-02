@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-import DashboardPage, {type Archer} from "@/components/DashboardPage.vue";
+import DashboardPage, {type Archer} from "@/components/pages/DashboardPage.vue";
+import "./style/style.css"
 
 const URL = 'http://localhost:7070/archers'
 
