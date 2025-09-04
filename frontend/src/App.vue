@@ -1,18 +1,24 @@
 <script setup lang="ts">
-import DashboardPage, { type Archer } from '@/components/pages/DashboardPage.vue'
-import './style/style.css'
+import './style/style.css';
+import './style/headerbar.css';
+import HeaderBar from "@/components/HeaderBar.vue";
 
-const URL = 'http://localhost:7070/archers'
-
-const getAllArchers = async (): Promise<Array<Archer>> => {
-  const response = await fetch(URL)
-
-  return await response.json()
-}
 </script>
 
 <template>
-  <DashboardPage :onGetAllArchers="getAllArchers" />
+  <v-app>
+    <v-main>
+      <v-container>
+        <div class="app-container">
+          <div class="header-bar-wrapper">
+            <HeaderBar />
+          </div>
+
+          <router-view/>
+        </div>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<style scoped></style>
+<style></style>

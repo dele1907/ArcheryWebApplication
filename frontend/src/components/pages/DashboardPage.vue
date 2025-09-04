@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import HeaderBar from '@/components/HeaderBar.vue'
 
 export type Archer = {
   name: string
@@ -11,33 +10,30 @@ export type Archer = {
   bowType: string
   ageCategory: string
 }
-
-const props = defineProps<{ onGetAllArchers: () => Promise<Array<Archer>> }>()
-
 const archers = ref<Array<Archer>>([])
+const URL = 'http://localhost:7070/archers'
 
-const onGetAllArchers = async () => {
-  archers.value = await props.onGetAllArchers()
+const onGetAllArchers = async (): Promise<void> => {
+  const response = await fetch(URL)
+
+  archers.value = await response.json()
 }
 </script>
 
 <template>
   <div data-testid="dashboard-page" class="page">
-    <div class="page-header">
-      <HeaderBar />
-    </div>
-
     <p>Welcome to the Archery Tournament Dashboard!</p>
-
     <button @click="onGetAllArchers">Get All Archers</button>
 
     <div class="archers-list">
       <ul v-if="archers.length > 0">
         <li v-for="archer in archers" :key="archer.id">
           <div class="archer-wrapper">
-            {{ archer.name }}
-            {{ archer.firstName }}
-            {{ archer.club }}
+            {{ archer.name }} |
+            {{ archer.firstName }} |
+            {{ archer.club }} |
+            {{ archer.bowType }} |
+            {{ archer.ageCategory }}
           </div>
         </li>
       </ul>
@@ -60,5 +56,6 @@ ul {
   border-radius: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 </style>

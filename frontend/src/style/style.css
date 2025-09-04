@@ -1,5 +1,16 @@
+:root {
+  --primary-color: #0995ce;
+  --primary-color-darkened: #087bb3;
+  --button-color: #506dbd;
+  --button-color-darkened: #4863b0;
+}
+
+.app-container {
+  margin: 20px;
+}
+
 .page {
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
