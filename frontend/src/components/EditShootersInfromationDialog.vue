@@ -2,10 +2,10 @@
 import { shallowRef } from 'vue'
 
 const dialog = shallowRef(false)
+//TODO make the form functional and prefill with existing data
 </script>
 
 <template>
-  //TODO make the form functional and prefill with existing data
   <div class="shooter-edit-dialog-wrapper">
     <v-dialog v-model="dialog" max-width="600">
       <template v-slot:activator="{ props: activatorProps }">
