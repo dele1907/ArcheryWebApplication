@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import router from "@/router";
+import router from '@/router'
 
 const props = defineProps<{
   title: string
@@ -8,11 +8,11 @@ const props = defineProps<{
 }>()
 
 const onCardClicked = () => {
-  const resolvedRoute = router.resolve(props.link);
+  const resolvedRoute = router.resolve(props.link)
   if (resolvedRoute.matched.length > 0) {
-    router.push(props.link);
+    router.push(props.link)
   } else {
-    alert(`Route ${props.link} existiert nicht!`);
+    alert(`Route ${props.link} existiert nicht!`)
   }
 }
 </script>
@@ -20,7 +20,7 @@ const onCardClicked = () => {
 <template>
   <v-card @click="onCardClicked" width="500" height="300" class="ma-4">
     <v-img :src="imageSrc"></v-img>
-    <v-card-title class="text-center">{{title}}</v-card-title>
+    <v-card-title class="text-center">{{ title }}</v-card-title>
   </v-card>
 </template>
 

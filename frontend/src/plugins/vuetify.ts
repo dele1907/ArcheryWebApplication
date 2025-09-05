@@ -1,6 +1,6 @@
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default createVuetify({
   icons: {
@@ -9,7 +9,7 @@ export default createVuetify({
       fa: {
         //eslint-disable-next-line @typescript-eslint/no-explicit-any
         component: FontAwesomeIcon as any,
-      }
+      },
     },
   },
   theme: {
@@ -17,10 +17,9 @@ export default createVuetify({
       light: {
         colors: {
           primary: '#0995ce',
-        }
+        },
       },
     },
     defaultTheme: 'light',
   },
 })
-

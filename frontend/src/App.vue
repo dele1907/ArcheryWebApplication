@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import './style/style.css';
-import './style/headerbar.css';
-import HeaderBar from "@/components/HeaderBar.vue";
-
+import './style/style.css'
+import './style/headerbar.css'
+import HeaderBar from '@/components/HeaderBar.vue'
 </script>
 
 <template>
   <v-app>
     <v-main>
       <v-container>
-          <div class="header-bar-wrapper">
-            <HeaderBar />
-          </div>
+        <div class="header-bar-wrapper">
+          <HeaderBar />
+        </div>
 
-          <router-view/>
+        <router-view />
       </v-container>
     </v-main>
   </v-app>

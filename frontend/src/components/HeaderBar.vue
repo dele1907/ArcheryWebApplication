@@ -1,15 +1,21 @@
 <script setup lang="ts">
- import app_logo from '@/assets/icons/app_logo.png';
+import app_logo from '@/assets/icons/app_logo.png'
 
- const onMenuButtonClick = () => {
-    alert('Main menu button clicked!');
- };
-
+const onMenuButtonClick = () => {
+  alert('Main menu button clicked!')
+}
 </script>
 
 <template>
   <div class="header-bar-button-wrapper">
-    <v-btn variant="elevated" density="comfortable" color="primary" icon="fa-bars" elevation="8" @click="onMenuButtonClick">
+    <v-btn
+      variant="elevated"
+      density="comfortable"
+      color="primary"
+      icon="fa-bars"
+      elevation="8"
+      @click="onMenuButtonClick"
+    >
     </v-btn>
   </div>
 
@@ -22,6 +28,4 @@
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
