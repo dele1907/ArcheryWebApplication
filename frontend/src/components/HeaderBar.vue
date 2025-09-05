@@ -1,4 +1,5 @@
 <script setup lang="ts">
+ import app_logo from '@/assets/icons/app_logo.png';
 
  const onMenuButtonClick = () => {
     alert('Main menu button clicked!');
@@ -8,9 +9,8 @@
 
 <template>
   <div class="header-bar-button-wrapper">
-    <button data-testid="main-menu-button" class="header-bar-button" @click="onMenuButtonClick">
-        <font-awesome-icon icon="fa-solid fa-bars" />
-    </button>
+    <v-btn variant="elevated" density="comfortable" color="primary" icon="fa-bars" elevation="8" @click="onMenuButtonClick">
+    </v-btn>
   </div>
 
   <div class="header-bar-title-wrapper">
@@ -18,7 +18,7 @@
   </div>
 
   <div class="header-bar-icon-wrapper">
-    <img src="@/assets/icons/app_logo.png" alt="App Logo" class="header-bar-icon" />
+    <img :src="app_logo" alt="App Logo" class="header-bar-icon" />
   </div>
 </template>
 

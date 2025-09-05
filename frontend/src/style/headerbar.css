@@ -19,23 +19,6 @@
       display: flex;
       justify-content: flex-start;
       flex-grow: 1;
-
-      button {
-        cursor: pointer;
-        border: none;
-        border-radius: 20px;
-        width: 35px;
-        height: 35px;
-        font-size: medium;
-        background-color: var(--button-color);
-        color: white;
-        box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-
-        &:hover {
-          background-color: var(--button-color-darkened);
-          transform: translateY(-2px);
-        }
-      }
     }
 
   .header-bar-icon {
