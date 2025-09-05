@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import app_logo from '@/assets/icons/app_logo.png'
+import { useRoute } from 'vue-router'
+import router from '@/router'
 
 const onMenuButtonClick = () => {
   alert('Main menu button clicked!')
@@ -20,7 +22,7 @@ const onMenuButtonClick = () => {
   </div>
 
   <div class="header-bar-title-wrapper">
-    <h1>Dashboard</h1>
+    <h1 @click="router.push('/')">{{ useRoute().meta.title }}</h1>
   </div>
 
   <div class="header-bar-icon-wrapper">
@@ -28,4 +30,10 @@ const onMenuButtonClick = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.header-bar-title-wrapper {
+  h1 {
+    cursor: pointer;
+  }
+}
+</style>
