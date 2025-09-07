@@ -12,7 +12,7 @@ const getIconBasedOnTheme = () => {
   return theme.global.name.value === 'light' ? 'fa-moon' : 'fa-sun'
 }
 
-const theme = useTheme();
+const theme = useTheme()
 </script>
 
 <template>
@@ -58,7 +58,6 @@ const theme = useTheme();
 }
 
 .header-bar-theme-toggle-button-wrapper {
-
   .header-bar-theme-toggle-button {
     position: relative;
     right: 10px;

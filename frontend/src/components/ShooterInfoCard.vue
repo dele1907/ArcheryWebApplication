@@ -4,6 +4,7 @@ import EditShootersInfromationDialog from '@/components/EditShootersInfromationD
 
 const props = defineProps<{
   shooter: Archer
+  onDeleteButton: (id: string) => Promise<void>
 }>()
 </script>
 
@@ -14,6 +15,7 @@ const props = defineProps<{
         >{{ props.shooter.name }}, {{ props.shooter.firstName }}</v-card-title
       >
       <v-card-text class="text-center ma-16">
+        <p><strong>ID:</strong> {{ props.shooter.id }}</p>
         <p><strong>Verein:</strong> {{ props.shooter.club }}</p>
         <p><strong>Altersklasse:</strong> {{ props.shooter.ageCategory }}</p>
         <p><strong>Disziplin:</strong> {{ props.shooter.bowType }}</p>
@@ -23,8 +25,9 @@ const props = defineProps<{
         icon="fa-trash"
         class="ma-1 shooter-delete-button"
         color="primary"
+        @click="onDeleteButton(props.shooter.id)"
       ></v-btn>
-      <EditShootersInfromationDialog class="shooter-edit-dialog"/>
+      <EditShootersInfromationDialog class="shooter-edit-dialog" />
     </v-card>
   </div>
 </template>

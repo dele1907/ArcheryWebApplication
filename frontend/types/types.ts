@@ -6,5 +6,13 @@ export type Archer = {
   id: string,
   bowType: string,
   ageCategory: string,
-  passportNumber: string,
+  passportNumber: number,
+}
+
+export type ArcherDTO = {
+  name: string,
+  firstName: string,
+  clubNumber: number,
+  bowType: string,
+  passportNumber: number,
 }
