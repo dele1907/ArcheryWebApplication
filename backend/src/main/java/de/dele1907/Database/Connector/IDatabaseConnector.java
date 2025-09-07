@@ -1,4 +1,4 @@
-package de.dele1907.Database;
+package de.dele1907.Database.Connector;
 
 import java.sql.Connection;
 import java.util.Optional;

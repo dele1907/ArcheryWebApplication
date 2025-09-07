@@ -1,5 +1,6 @@
 package de.dele1907.Service;
 
+import de.dele1907.Database.Repository.ArcherRepository;
 import de.dele1907.Model.Archer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class ArcherServiceTest {
 
     @BeforeAll
     static void setup() {
-        mockArcherService = new ArcherService();
+        mockArcherService = new ArcherService(new ArcherRepository());
         archers.add(new Archer("4711", "Napp", "Karl", "Beispielverein", 1234, "Recurve", "Adult", 4711));
         archers.add(new Archer("0815","Mustermann", "Max", "Musterverein", 5678, "Compound", "Junior", 815));
     }
@@ -22,7 +23,7 @@ public class ArcherServiceTest {
     @Test
     void testGetAllEntities() {
         List<Archer> result = mockArcherService.getAllEntities();
-        assert result.get(0).getFirstName() == archers.get(0).getFirstName();
+        assert result.getFirst().getFirstName().equals(archers.getFirst().getFirstName());
     }
 
     @Test

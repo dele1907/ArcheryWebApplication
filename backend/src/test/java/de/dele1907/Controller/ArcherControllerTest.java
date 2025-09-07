@@ -1,5 +1,6 @@
 package de.dele1907.Controller;
 
+import de.dele1907.Database.Repository.ArcherRepository;
 import de.dele1907.Model.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
@@ -17,7 +18,7 @@ class ArcherControllerTest {
 
     @BeforeAll
     static void setup() {
-        mockService = new ArcherService() {
+        mockService = new ArcherService(new ArcherRepository()) {
             @Override
             public List<Archer> getAllEntities() {
                 return List.of(

@@ -1,44 +1,34 @@
 package de.dele1907.Service;
 
+import de.dele1907.Database.Repository.ArcherRepository;
 import de.dele1907.Model.Archer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArcherService implements IBaseService<Archer> {
-    private final List<Archer> archers = new ArrayList<>();
+    private final ArcherRepository archerRepository;
 
-    public ArcherService() {
-        archers.add(new Archer("4711", "Napp", "Karl", "Beispielverein", 1234, "Recurve", "Adult", 4711));
-        archers.add(new Archer("0815","Mustermann", "Max", "Musterverein", 5678, "Compound", "Junior", 815));
+    public ArcherService(ArcherRepository archerRepository) {
+        this.archerRepository = archerRepository;
     }
 
     public List<Archer> getAllEntities() {
-        return archers;
+        return archerRepository.findAll();
     }
 
     public Archer getEntityById(String id) {
-        return archers.stream()
-                .filter(archer -> archer.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return archerRepository.findById(id).orElse(null);
     }
 
     public boolean deleteEntityById(String id) {
-        return archers.removeIf(archer -> archer.getId().equals(id));
+        return archerRepository.deleteById(id);
     }
 
     public boolean saveNewEntity(Archer archer) {
-        return archers.add(archer);
+        return archerRepository.save(archer);
     }
 
     public void updateEntity(Archer entity) {
-        for (int i = 0; i < archers.size(); i++) {
-            if (archers.get(i).getId().equals(entity.getId())) {
-                archers.set(i, entity);
-
-                return;
-            }
-        }
+        archerRepository.save(entity);
     }
 }

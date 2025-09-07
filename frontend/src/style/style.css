@@ -10,4 +10,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
 }
+
+html, body, #app, .v-application {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.v-main {
+  height: 100%;
+}
+
+.v-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+

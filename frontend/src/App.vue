@@ -18,4 +18,5 @@ import HeaderBar from '@/components/HeaderBar.vue'
   </v-app>
 </template>
 
-<style></style>
+<style>
+</style>
