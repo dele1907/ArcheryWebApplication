@@ -7,8 +7,8 @@ public class Archer extends Shooter {
     private final String bowType;
     private final String ageCategory;
 
-    public Archer(String id, String name, String firstName, String club, int clubNumber, String bowType, String ageCategory) {
-        super(id, name, firstName, club, clubNumber);
+    public Archer(String id, String name, String firstName, String club, int clubNumber, String bowType, String ageCategory, int passportNumber) {
+        super(id, name, firstName, club, clubNumber, passportNumber);
         this.bowType = bowType;
         this.ageCategory = ageCategory;
     }

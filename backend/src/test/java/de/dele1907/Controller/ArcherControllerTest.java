@@ -16,10 +16,10 @@ class ArcherControllerTest {
     void testGetAllArchersEndpoint() {
         ArcherService mockService = new ArcherService() {
             @Override
-            public List<Archer> getAllArchers() {
+            public List<Archer> getAllEntities() {
                 return List.of(
-                        new Archer("4711","Doe", "John", "TestClub", 42, "Recurve", "Adult"),
-                        new Archer("0815","Smith", "Jane", "AnotherClub", 99, "Compound", "Junior")
+                        new Archer("4711","Doe", "John", "TestClub", 42, "Recurve", "Adult", 4711),
+                        new Archer("0815","Smith", "Jane", "AnotherClub", 99, "Compound", "Junior", 815)
                 );
             }
         };
@@ -41,10 +41,10 @@ class ArcherControllerTest {
     void getArcherById() {
         ArcherService mockService = new ArcherService() {
             @Override
-            public List<Archer> getAllArchers() {
+            public List<Archer> getAllEntities() {
                 return List.of(
-                        new Archer("4711","Doe", "John", "TestClub", 42, "Recurve", "Adult"),
-                        new Archer("0815","Smith", "Jane", "AnotherClub", 99, "Compound", "Junior")
+                        new Archer("4711","Doe", "John", "TestClub", 42, "Recurve", "Adult", 4711),
+                        new Archer("0815","Smith", "Jane", "AnotherClub", 99, "Compound", "Junior", 815)
                 );
             }
         };
