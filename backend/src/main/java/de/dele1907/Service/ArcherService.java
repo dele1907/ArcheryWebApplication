@@ -36,6 +36,7 @@ public class ArcherService implements IBaseService<Archer> {
         for (int i = 0; i < archers.size(); i++) {
             if (archers.get(i).getId().equals(entity.getId())) {
                 archers.set(i, entity);
+
                 return;
             }
         }
