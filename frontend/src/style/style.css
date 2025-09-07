@@ -13,7 +13,10 @@
   overflow: scroll;
 }
 
-html, body, #app, .v-application {
+html,
+body,
+#app,
+.v-application {
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -28,4 +31,3 @@ html, body, #app, .v-application {
   display: flex;
   flex-direction: column;
 }
-

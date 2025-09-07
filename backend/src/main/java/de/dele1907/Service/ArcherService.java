@@ -1,6 +1,7 @@
 package de.dele1907.Service;
 
 import de.dele1907.Database.Repository.ArcherRepository;
+import de.dele1907.Exception.NoArchesFoundException;
 import de.dele1907.Model.Archer;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public class ArcherService implements IBaseService<Archer> {
         this.archerRepository = archerRepository;
     }
 
-    public List<Archer> getAllEntities() {
+    public List<Archer> getAllEntities() throws NoArchesFoundException {
         return archerRepository.findAll();
     }
 
@@ -28,7 +29,7 @@ public class ArcherService implements IBaseService<Archer> {
         return archerRepository.save(archer);
     }
 
-    public void updateEntity(Archer entity) {
-        archerRepository.save(entity);
+    public boolean updateEntity(Archer entity) {
+        return archerRepository.update(entity);
     }
 }

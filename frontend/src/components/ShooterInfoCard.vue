@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Archer } from '../../types/types.ts'
-import EditShootersInfromationDialog from '@/components/EditShootersInfromationDialog.vue'
+import type { Archer } from '../../types/types.ts';
+import EditShootersInfromationDialog from '@/components/EditShootersInfromationDialog.vue';
 
 const props = defineProps<{
-  shooter: Archer
-  onDeleteButton: (id: string) => Promise<void>
-}>()
+  shooter: Archer;
+  onDeleteButton: (id: string) => Promise<void>;
+}>();
 </script>
 
 <template>

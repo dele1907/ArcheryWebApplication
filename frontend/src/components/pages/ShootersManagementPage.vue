@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { ApiHelper } from '@/helpers/api/apihelper.ts'
-import { onMounted, ref } from 'vue'
-import type { Archer } from '../../../types/types.ts'
-import ShooterInfoCard from '@/components/ShooterInfoCard.vue'
-import CreateShooterDialog from '@/components/CreateShooterDialog.vue'
+import { ApiHelper } from '@/helpers/api/apihelper.ts';
+import { onMounted, ref } from 'vue';
+import type { Archer } from '../../../types/types.ts';
+import ShooterInfoCard from '@/components/ShooterInfoCard.vue';
+import CreateShooterDialog from '@/components/CreateShooterDialog.vue';
 
-const shooters = ref<Array<Archer>>([])
+const shooters = ref<Array<Archer>>([]);
 
 onMounted(async () => {
-  shooters.value = await ApiHelper.fetchShooters()
-})
+  shooters.value = await ApiHelper.fetchShooters();
+});
 
 const onDeleteButton = async (id: string) => {
-  const confirmed = confirm('Sind Sie sicher, dass Sie diesen Schützen löschen möchten?')
+  const confirmed = confirm('Sind Sie sicher, dass Sie diesen Schützen löschen möchten?');
 
   if (confirmed) {
-    const success = await ApiHelper.deleteShooter(id)
+    const success = await ApiHelper.deleteShooter(id);
 
     if (success) {
-      shooters.value = shooters.value.filter((shooter) => shooter.id !== id)
+      shooters.value = shooters.value.filter((shooter) => shooter.id !== id);
     } else {
-      alert('Fehler beim Löschen des Schützen. Bitte versuchen Sie es erneut.')
+      alert('Fehler beim Löschen des Schützen. Bitte versuchen Sie es erneut.');
     }
   }
-}
+};
 </script>
 
 <template>

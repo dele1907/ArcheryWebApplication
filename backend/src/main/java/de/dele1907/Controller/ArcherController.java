@@ -1,5 +1,6 @@
 package de.dele1907.Controller;
 
+import de.dele1907.Exception.NoArchesFoundException;
 import de.dele1907.Model.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
@@ -20,7 +21,7 @@ public class ArcherController extends BaseController<Archer>{
     }
 
     private void registerGetAllArchers(Javalin app) {
-        app.get("/archers" , ctx -> ctx.json(this.getService().getAllEntities()));
+            app.get("/archers" , ctx -> ctx.json(this.getService().getAllEntities()));
     }
 
     private void registerGetUserById(Javalin app) {

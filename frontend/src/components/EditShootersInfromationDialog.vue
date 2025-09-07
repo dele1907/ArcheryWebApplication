@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { shallowRef } from 'vue';
 
-const dialog = shallowRef(false)
+const dialog = shallowRef(false);
 //TODO make the form functional and prefill with existing data
 </script>
 

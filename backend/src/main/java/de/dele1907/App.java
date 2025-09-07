@@ -2,6 +2,7 @@ package de.dele1907;
 
 import de.dele1907.Controller.ArcherController;
 import de.dele1907.Database.Repository.ArcherRepository;
+import de.dele1907.Exception.GlobalExceptionHandler;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
 
@@ -20,6 +21,7 @@ public class App
             });
         }).start(7070);
 
+        GlobalExceptionHandler.registerExceptionHandlers(app);
         new ArcherController(new ArcherService(new ArcherRepository())).registerRoutes(app);
     }
 }

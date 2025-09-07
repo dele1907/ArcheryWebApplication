@@ -21,13 +21,12 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     }
 
     @Override
-    public List<Archer> findAll() {
-        try {
-            if (archers.isEmpty()) {
-                throw new NoArchesFoundException();
-            }
-        } catch (Exception e) {
-            logger.error(e.getMessage());
+    public List<Archer> findAll() throws NoArchesFoundException {
+
+        if (archers.isEmpty()) {
+            logger.error("No archers found in the database.");
+
+            throw new NoArchesFoundException();
         }
 
         //TODO: Implement database logic here
@@ -38,7 +37,7 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     @Override
     public Optional<Archer> findById(String id) {
         // Find archer by ID in the dummy data
-        for (Archer archer : archers) {
+        for (var archer : archers) {
             if (archer.getId().equals(id)) {
                 return Optional.of(archer);
             }
@@ -51,7 +50,15 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     @Override
     public boolean deleteById(String id) {
         // Dummy implementation
-        return archers.removeIf(archer -> archer.getId().equals(id));
+        var removed = archers.removeIf(archer -> archer.getId().equals(id));
+
+        if (removed) {
+            logger.info("Archer with ID {} has been removed.", id);
+        } else {
+            logger.error("No archer found with ID {} to remove.", id);
+        }
+
+        return removed;
         // TODO Auto-generated method stub
     }
 
@@ -64,15 +71,18 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
 
     @Override
     public boolean update(Archer entity) {
-        // Dummy implementation
         for (int i = 0; i < archers.size(); i++) {
+
             if (archers.get(i).getId().equals(entity.getId())) {
                 archers.set(i, entity);
+                logger.info("Archer with ID {} has been updated.", entity.getId());
+
                 return true;
             }
         }
+        logger.error("No archer found with ID {} to update.", entity.getId());
 
-        // TODO Auto-generated method stub
         return false;
     }
+
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import './style/style.css'
-import './style/headerbar.css'
-import HeaderBar from '@/components/HeaderBar.vue'
+import './style/style.css';
+import './style/headerbar.css';
+import HeaderBar from '@/components/HeaderBar.vue';
 </script>
 
 <template>
@@ -18,5 +18,4 @@ import HeaderBar from '@/components/HeaderBar.vue'
   </v-app>
 </template>
 
-<style>
-</style>
+<style></style>

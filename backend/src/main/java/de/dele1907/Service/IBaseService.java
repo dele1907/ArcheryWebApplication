@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IBaseService<E> {
 
-    List<E> getAllEntities();
+    List<E> getAllEntities() throws Exception;
 
     E getEntityById(String id);
 
@@ -12,5 +12,5 @@ public interface IBaseService<E> {
 
     boolean saveNewEntity(E entity);
 
-    void updateEntity(E entity);
+    boolean updateEntity(E entity);
 }

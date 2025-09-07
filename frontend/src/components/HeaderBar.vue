@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import app_logo from '@/assets/icons/app_logo.png'
-import { useRoute } from 'vue-router'
-import router from '@/router'
-import { useTheme } from 'vuetify'
+import app_logo from '@/assets/icons/app_logo.png';
+import { useRoute } from 'vue-router';
+import router from '@/router';
+import { useTheme } from 'vuetify';
 
 const onMenuButtonClick = () => {
-  alert('Main menu button clicked!')
-}
+  alert('Main menu button clicked!');
+};
 
 const getIconBasedOnTheme = () => {
-  return theme.global.name.value === 'light' ? 'fa-moon' : 'fa-sun'
-}
+  return theme.global.name.value === 'light' ? 'fa-moon' : 'fa-sun';
+};
 
-const theme = useTheme()
+const theme = useTheme();
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
-import type { Archer } from '../../types/types.ts'
-import { ApiHelper } from '@/helpers/api/apihelper.ts'
+import { ref, shallowRef } from 'vue';
+import type { Archer } from '../../types/types.ts';
+import { ApiHelper } from '@/helpers/api/apihelper.ts';
 
-const dialog = shallowRef(false)
-const bowTypes = ['Blank', 'Compound', 'Recurve']
+const dialog = shallowRef(false);
+const bowTypes = ['Blank', 'Compound', 'Recurve'];
 
 const newArcher: Archer = {
   id: '',
@@ -15,9 +15,9 @@ const newArcher: Archer = {
   ageCategory: '',
   bowType: '',
   club: '',
-}
+};
 
-const archer = ref<Archer>(newArcher)
+const archer = ref<Archer>(newArcher);
 
 function resetFormInputs(): void {
   archer.value = {
@@ -29,57 +29,57 @@ function resetFormInputs(): void {
     ageCategory: '',
     bowType: '',
     club: '',
-  }
+  };
 }
 
 function getNecessaryTextFields(): string[] {
-  return [archer.value.firstName, archer.value.name, archer.value.bowType]
+  return [archer.value.firstName, archer.value.name, archer.value.bowType];
 }
 
 function getNecessaryNumberFields(): number[] {
-  return [archer.value.clubNumber, archer.value.passportNumber]
+  return [archer.value.clubNumber, archer.value.passportNumber];
 }
 function getInputFieldsAreValid(): boolean {
   if (getNecessaryTextFields().some((field) => field.trim() === '')) {
-    alert('Please fill all required text fields.')
+    alert('Please fill all required text fields.');
 
-    return false
+    return false;
   }
 
   if (getNecessaryNumberFields().some((field) => field === 0 || isNaN(field))) {
-    alert('Please fill all required number fields with valid numbers.')
+    alert('Please fill all required number fields with valid numbers.');
 
-    return false
+    return false;
   }
 
-  return true
+  return true;
 }
 
 const onSaveButtonClicked = () => {
   if (!getInputFieldsAreValid()) {
-    alert('Fill all required fields!')
+    alert('Fill all required fields!');
 
-    return
+    return;
   }
 
   ApiHelper.createShooter(getArcherApiObject())
     .then((response) => {
       if (response.ok) {
-        alert('Shooter created successfully!')
+        alert('Shooter created successfully!');
       } else {
-        alert('Failed to create shooter.')
+        alert('Failed to create shooter.');
       }
     })
     .catch((error) => {
-      console.error('Error creating shooter:', error)
-      alert('An error occurred while creating the shooter.')
-    })
+      console.error('Error creating shooter:', error);
+      alert('An error occurred while creating the shooter.');
+    });
 
-  resetFormInputs()
+  resetFormInputs();
 
-  dialog.value = false
-  window.location.reload()
-}
+  dialog.value = false;
+  window.location.reload();
+};
 
 function getArcherApiObject(): Archer {
   return {
@@ -91,13 +91,13 @@ function getArcherApiObject(): Archer {
     ageCategory: 'Altersklasse',
     bowType: archer.value.bowType,
     club: 'Beispiel',
-  }
+  };
 }
 
 const onCancelButton = () => {
-  resetFormInputs()
-  dialog.value = false
-}
+  resetFormInputs();
+  dialog.value = false;
+};
 </script>
 
 <template>

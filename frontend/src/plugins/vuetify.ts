@@ -1,6 +1,6 @@
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default createVuetify({
   icons: {
@@ -22,4 +22,4 @@ export default createVuetify({
     },
     defaultTheme: 'system',
   },
-})
+});

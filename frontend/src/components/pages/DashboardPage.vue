@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import DashboardCard from '@/components/dashboardcomponents/DashboardCard.vue'
-import dashboard_archer_overview from '@/assets/images/dashboard/dashboard_archer_overview_image.png'
+import DashboardCard from '@/components/dashboardcomponents/DashboardCard.vue';
+import dashboard_archer_overview from '@/assets/images/dashboard/dashboard_archer_overview_image.png';
 </script>
 
 <template>

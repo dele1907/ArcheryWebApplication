@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import router from '@/router'
+import router from '@/router';
 
 const props = defineProps<{
-  title: string
-  imageSrc: string
-  link: string
-}>()
+  title: string;
+  imageSrc: string;
+  link: string;
+}>();
 
 const onCardClicked = () => {
-  const resolvedRoute = router.resolve(props.link)
+  const resolvedRoute = router.resolve(props.link);
   if (resolvedRoute.matched.length > 0) {
-    router.push(props.link)
+    router.push(props.link);
   } else {
-    alert(`Route ${props.link} existiert nicht!`)
+    alert(`Route ${props.link} existiert nicht!`);
   }
-}
+};
 </script>
 
 <template>
