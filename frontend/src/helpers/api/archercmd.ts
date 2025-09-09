@@ -9,9 +9,7 @@ export class ArcherCmd {
   public static async createArcherCmd(archer: Archer): Promise<void> {
     await ApiHelper.basicPostRequest('archers', archer)
       .then((response) => {
-        if (response.ok) {
-          alert('Shooter created successfully!');
-        } else {
+        if (!response.ok) {
           alert('Failed to create shooter.');
         }
       })
