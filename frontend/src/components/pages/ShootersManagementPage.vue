@@ -1,27 +1,43 @@
 <script setup lang="ts">
-import { ApiHelper } from '@/helpers/api/apihelper.ts';
 import { onMounted, ref } from 'vue';
 import type { Archer } from '../../../types/types.ts';
 import ShooterInfoCard from '@/components/ShooterInfoCard.vue';
 import CreateShooterDialog from '@/components/CreateShooterDialog.vue';
+import { ArcherCmd } from '@/helpers/api/archercmd.ts';
 
 const shooters = ref<Array<Archer>>([]);
 
 onMounted(async () => {
-  shooters.value = await ApiHelper.fetchShooters();
+  shooters.value = await ArcherCmd.getAllArchersCmd();
 });
 
 const onDeleteButton = async (id: string) => {
   const confirmed = confirm('Sind Sie sicher, dass Sie diesen Schützen löschen möchten?');
 
   if (confirmed) {
-    const success = await ApiHelper.deleteShooter(id);
+    const success = await ArcherCmd.deleteArcherCmd(id);
 
     if (success) {
       shooters.value = shooters.value.filter((shooter) => shooter.id !== id);
     } else {
       alert('Fehler beim Löschen des Schützen. Bitte versuchen Sie es erneut.');
     }
+  }
+};
+
+const onCreateShooter = async (newArcher: Archer) => {
+  await ArcherCmd.createArcherCmd(newArcher);
+
+  shooters.value = await ArcherCmd.getAllArchersCmd();
+};
+
+const onShooterUpdated = async (updatedArcher: Archer) => {
+  const response = await ArcherCmd.updateArcherCmd(updatedArcher);
+
+  if (response) {
+    shooters.value = await ArcherCmd.getAllArchersCmd();
+  } else {
+    alert('Fehler beim Aktualisieren des Schützen. Bitte versuchen Sie es erneut.');
   }
 };
 </script>
@@ -35,12 +51,16 @@ const onDeleteButton = async (id: string) => {
       </div>
 
       <div v-for="shooter in shooters" :key="shooter.id" class="shooter-card-wrapper">
-        <ShooterInfoCard :shooter="shooter" :onDeleteButton="onDeleteButton" />
+        <ShooterInfoCard
+          :shooter="shooter"
+          :onDeleteButton="onDeleteButton"
+          :onShooterUpdated="onShooterUpdated"
+        />
       </div>
     </div>
 
     <div class="shooters-create-new-button-wrapper">
-      <CreateShooterDialog />
+      <CreateShooterDialog :on-create-shooter="onCreateShooter" />
     </div>
   </div>
 </template>

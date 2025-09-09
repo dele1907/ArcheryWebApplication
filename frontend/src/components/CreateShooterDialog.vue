@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue';
 import type { Archer } from '../../types/types.ts';
-import { ApiHelper } from '@/helpers/api/apihelper.ts';
+import { DSB_RULESET_HELPER } from '@/helpers/dsbrulesethelper.ts';
+
+const props = defineProps<{
+  onCreateShooter: (newArcher: Archer) => Promise<void>;
+}>();
 
 const dialog = shallowRef(false);
-const bowTypes = ['Blank', 'Compound', 'Recurve'];
 
 const newArcher: Archer = {
   id: '',
@@ -55,30 +58,18 @@ function getInputFieldsAreValid(): boolean {
   return true;
 }
 
-const onSaveButtonClicked = () => {
+const onSaveButton = async () => {
   if (!getInputFieldsAreValid()) {
     alert('Fill all required fields!');
 
     return;
   }
 
-  ApiHelper.createShooter(getArcherApiObject())
-    .then((response) => {
-      if (response.ok) {
-        alert('Shooter created successfully!');
-      } else {
-        alert('Failed to create shooter.');
-      }
-    })
-    .catch((error) => {
-      console.error('Error creating shooter:', error);
-      alert('An error occurred while creating the shooter.');
-    });
+  await props.onCreateShooter(getArcherApiObject());
 
   resetFormInputs();
 
   dialog.value = false;
-  window.location.reload();
 };
 
 function getArcherApiObject(): Archer {
@@ -160,7 +151,7 @@ const onCancelButton = () => {
 
             <v-col cols="12" sm="12">
               <v-select
-                :items="bowTypes"
+                :items="DSB_RULESET_HELPER.BOW_TYPES"
                 label="Bogenart *"
                 v-model="archer.bowType"
                 variant="underlined"
@@ -179,7 +170,7 @@ const onCancelButton = () => {
 
           <v-btn text="Abbrechen" variant="plain" @click="onCancelButton"></v-btn>
 
-          <v-btn color="primary" icon="fa-save" @click="onSaveButtonClicked"></v-btn>
+          <v-btn color="primary" icon="fa-save" @click="onSaveButton"></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

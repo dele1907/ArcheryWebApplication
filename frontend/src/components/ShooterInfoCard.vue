@@ -5,6 +5,7 @@ import EditShootersInfromationDialog from '@/components/EditShootersInfromationD
 const props = defineProps<{
   shooter: Archer;
   onDeleteButton: (id: string) => Promise<void>;
+  onShooterUpdated: (updatedArcher: Archer) => Promise<void>;
 }>();
 </script>
 
@@ -27,7 +28,11 @@ const props = defineProps<{
         color="primary"
         @click="onDeleteButton(props.shooter.id)"
       ></v-btn>
-      <EditShootersInfromationDialog class="shooter-edit-dialog" />
+      <EditShootersInfromationDialog
+        class="shooter-edit-dialog"
+        :archer="shooter"
+        :onShooterUpdated="props.onShooterUpdated"
+      />
     </v-card>
   </div>
 </template>

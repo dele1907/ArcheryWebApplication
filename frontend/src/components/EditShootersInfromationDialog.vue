@@ -1,8 +1,32 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue';
+import { ref, shallowRef } from 'vue';
+import type { Archer } from '../../types/types.ts';
+import { DSB_RULESET_HELPER } from '@/helpers/dsbrulesethelper.ts';
+
+const props = defineProps<{
+  archer: Archer;
+  onShooterUpdated: (updatedArcher: Archer) => Promise<void>;
+}>();
+
+const initialArcher = {
+  id: props.archer.id,
+  firstName: props.archer.firstName,
+  name: props.archer.name,
+  clubNumber: props.archer.clubNumber,
+  passportNumber: props.archer.passportNumber,
+  ageCategory: props.archer.ageCategory,
+  bowType: props.archer.bowType,
+  club: props.archer.club,
+};
+
+const editedArcher = ref<Archer>(initialArcher);
 
 const dialog = shallowRef(false);
 //TODO make the form functional and prefill with existing data
+
+const onCancelButton = () => {
+  dialog.value = false;
+};
 </script>
 
 <template>
@@ -18,66 +42,63 @@ const dialog = shallowRef(false);
         ></v-btn>
       </template>
 
-      <v-card prepend-icon="fa-user" title="Schützen Informationen bearbeiten">
+      <v-card prepend-icon="fa-user" title="Neuen Schützen anlegen">
         <v-card-text>
           <v-row dense>
-            <v-col cols="12" md="4" sm="6">
-              <v-text-field label="First name*" required></v-text-field>
-            </v-col>
-
-            <v-col cols="12" md="4" sm="6">
+            <v-col cols="12" md="6" sm="6">
               <v-text-field
-                hint="example of helper text only on focus"
-                label="Middle name"
+                label="Vorname *"
+                v-model="editedArcher.firstName"
+                required
+                autofocus
               ></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="4" sm="6">
+            <v-col cols="12" md="6" sm="6">
               <v-text-field
-                hint="example of persistent helper text"
-                label="Last name*"
+                label="Name *"
+                v-model="editedArcher.name"
                 persistent-hint
                 required
               ></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="4" sm="6">
-              <v-text-field label="Email*" required></v-text-field>
+            <v-col cols="12" md="6" sm="6">
+              <v-number-input
+                label="Vereinsnummer *"
+                v-model="editedArcher.clubNumber"
+                type="number"
+                controlVariant="hidden"
+                required
+              ></v-number-input>
             </v-col>
 
-            <v-col cols="12" md="4" sm="6">
-              <v-text-field label="Password*" type="password" required></v-text-field>
+            <v-col cols="12" md="6" sm="6">
+              <v-number-input
+                label="Passnummer *"
+                v-model="editedArcher.passportNumber"
+                type="number"
+                controlVariant="hidden"
+                required
+              ></v-number-input>
             </v-col>
 
-            <v-col cols="12" md="4" sm="6">
-              <v-text-field label="Confirm Password*" type="password" required></v-text-field>
+            <v-col cols="12" md="12" sm="6">
+              <v-text-field label="Geburtsadatum *" type="date" required></v-text-field>
             </v-col>
 
-            <v-col cols="12" sm="6">
-              <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*" required></v-select>
-            </v-col>
-
-            <v-col cols="12" sm="6">
-              <v-autocomplete
-                :items="[
-                  'Skiing',
-                  'Ice hockey',
-                  'Soccer',
-                  'Basketball',
-                  'Hockey',
-                  'Reading',
-                  'Writing',
-                  'Coding',
-                  'Basejump',
-                ]"
-                label="Interests"
+            <v-col cols="12" sm="12">
+              <v-select
+                :items="DSB_RULESET_HELPER.BOW_TYPES"
+                v-model="editedArcher.bowType"
+                label="Bogenart *"
+                variant="underlined"
                 auto-select-first
-                multiple
-              ></v-autocomplete>
+              ></v-select>
             </v-col>
           </v-row>
 
-          <small class="text-caption text-medium-emphasis">*indicates required field</small>
+          <small class="text-caption text-medium-emphasis">* Pflichtfelder</small>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -85,9 +106,13 @@ const dialog = shallowRef(false);
         <v-card-actions>
           <v-spacer></v-spacer>
 
-          <v-btn text="Close" variant="plain" @click="dialog = false"></v-btn>
+          <v-btn text="Abbrechen" variant="plain" @click="onCancelButton"></v-btn>
 
-          <v-btn color="primary" text="Save" variant="tonal" @click="dialog = false"></v-btn>
+          <v-btn
+            color="primary"
+            icon="fa-save"
+            @click="props.onShooterUpdated(editedArcher)"
+          ></v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -1,6 +1,5 @@
 package de.dele1907.Controller;
 
-import de.dele1907.Exception.NoArchesFoundException;
 import de.dele1907.Model.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
@@ -15,16 +14,17 @@ public class ArcherController extends BaseController<Archer>{
 
     public void registerRoutes(Javalin app) {
         registerGetAllArchers(app);
-        registerGetUserById(app);
+        registerGetArcherById(app);
         registerCreateNewArcher(app);
         registerDeleteArcher(app);
+        registerUpdateArcher(app);
     }
 
     private void registerGetAllArchers(Javalin app) {
             app.get("/archers" , ctx -> ctx.json(this.getService().getAllEntities()));
     }
 
-    private void registerGetUserById(Javalin app) {
+    private void registerGetArcherById(Javalin app) {
         app.get("/archers/{id}", ctx -> {
             String id = ctx.pathParam("id");
             var archer = this.getService().getEntityById(id);
@@ -67,6 +67,30 @@ public class ArcherController extends BaseController<Archer>{
 
             if (success) {
                 ctx.status(200).result("Archer deleted");
+            } else {
+                ctx.status(404).result("Archer not found");
+            }
+        });
+    }
+
+    private void registerUpdateArcher(Javalin app) {
+        app.put("/archers/{id}", ctx -> {
+            String id = ctx.pathParam("id");
+            var result = ctx.bodyAsClass(Archer.class);
+            var archer = new Archer(
+                    id,
+                    result.getName(),
+                    result.getFirstName(),
+                    result.getClub(),
+                    result.getClubNumber(),
+                    result.getBowType(),
+                    result.getAgeCategory(),
+                    result.getPassportNumber()
+            );
+            boolean success = this.getService().updateEntity(archer);
+
+            if (success) {
+                ctx.status(200).result("Archer updated");
             } else {
                 ctx.status(404).result("Archer not found");
             }

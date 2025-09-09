@@ -7,7 +7,6 @@ import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,6 +62,65 @@ class ArcherControllerTest {
             var response = client.get("/archers/" + id);
             assertEquals(200, response.code());
             assertTrue(response.body().string().contains("Napp"));
+        });
+    }
+
+    @Test
+    void deleteArcherById() {
+        String id = "0815";
+
+        Javalin app = Javalin.create();
+        new ArcherController(mockService).registerRoutes(app);
+
+        JavalinTest.test(app, (server, client) -> {
+            var response = client.delete("/archers/" + id);
+            assertEquals(200, response.code());
+            assertTrue(response.body().string().contains("Archer deleted"));
+        });
+    }
+
+    @Test
+    void createNewArcher() {
+        Javalin app = Javalin.create();
+        new ArcherController(mockService).registerRoutes(app);
+        String newArcherJson = """
+                {
+                    "name": "Doe",
+                    "firstName": "Jane",
+                    "club": "NewClub",
+                    "clubNumber": 1234,
+                    "bowType": "Recurve",
+                    "ageCategory": "Adult",
+                    "passportNumber": 5678
+                }
+                """;
+        JavalinTest.test(app, (server, client) -> {
+            var response = client.post("/archers", newArcherJson);
+            assertEquals(201, response.code());
+            assertTrue(response.body().string().contains("Archer created"));
+        });
+    }
+
+    @Test
+    void updateArcher() {
+        Javalin app = Javalin.create();
+        new ArcherController(mockService).registerRoutes(app);
+        String updatedArcherJson = """
+                {
+                    "id": "4711",
+                    "name": "Nappos",
+                    "firstName": "Karlos",
+                    "club": "Beispielverein",
+                    "clubNumber": 1234,
+                    "bowType": "Recurve",
+                    "ageCategory": "Adult",
+                    "passportNumber": 4711
+                }
+                """;
+        JavalinTest.test(app, (server, client) -> {
+            var response = client.put("/archers/" + "4711", updatedArcherJson);
+            assertEquals(200, response.code());
+            assertTrue(response.body().string().contains("Archer updated"));
         });
     }
 }
