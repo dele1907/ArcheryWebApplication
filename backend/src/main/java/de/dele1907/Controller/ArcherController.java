@@ -3,13 +3,17 @@ package de.dele1907.Controller;
 import de.dele1907.Model.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 
 public class ArcherController extends BaseController<Archer>{
+    public static final Logger LOGGER = LoggerFactory.getLogger(ArcherController.class);
 
     public ArcherController(ArcherService archerService) {
         super(archerService);
+        this.PATH = "/archers";
     }
 
     public void registerRoutes(Javalin app) {
@@ -21,11 +25,11 @@ public class ArcherController extends BaseController<Archer>{
     }
 
     private void registerGetAllArchers(Javalin app) {
-            app.get("/archers" , ctx -> ctx.json(this.getService().getAllEntities()));
+            app.get(this.PATH , ctx -> ctx.json(this.getService().getAllEntities()));
     }
 
     private void registerGetArcherById(Javalin app) {
-        app.get("/archers/{id}", ctx -> {
+        app.get(this.PATH + "/{id}", ctx -> {
             String id = ctx.pathParam("id");
             var archer = this.getService().getEntityById(id);
 
@@ -33,12 +37,13 @@ public class ArcherController extends BaseController<Archer>{
                 ctx.json(archer);
             } else {
                 ctx.status(404).result("Archer not found");
+                loggerLogArcherNotFoundById(id);
             }
         });
     }
 
     private void registerCreateNewArcher(Javalin app) {
-        app.post("/archers", ctx -> {
+        app.post(this.PATH, ctx -> {
             var result = ctx.bodyAsClass(de.dele1907.Model.Archer.class);
             var archer = new Archer(
                     UUID.randomUUID().toString(),
@@ -56,12 +61,13 @@ public class ArcherController extends BaseController<Archer>{
                 ctx.status(201).result("Archer created");
             } else {
                 ctx.status(500).result("Failed to create archer");
+                LOGGER.error("Failed to create archer");
             }
         });
     }
 
     private void registerDeleteArcher(Javalin app) {
-        app.delete("/archers/{id}", ctx -> {
+        app.delete(this.PATH + "/{id}", ctx -> {
             String id = ctx.pathParam("id");
             boolean success = this.getService().deleteEntityById(id);
 
@@ -69,12 +75,13 @@ public class ArcherController extends BaseController<Archer>{
                 ctx.status(200).result("Archer deleted");
             } else {
                 ctx.status(404).result("Archer not found");
+                loggerLogArcherNotFoundById(id);
             }
         });
     }
 
     private void registerUpdateArcher(Javalin app) {
-        app.put("/archers/{id}", ctx -> {
+        app.put(this.PATH + "/{id}", ctx -> {
             String id = ctx.pathParam("id");
             var result = ctx.bodyAsClass(Archer.class);
             var archer = new Archer(
@@ -93,7 +100,12 @@ public class ArcherController extends BaseController<Archer>{
                 ctx.status(200).result("Archer updated");
             } else {
                 ctx.status(404).result("Archer not found");
+                loggerLogArcherNotFoundById(id);
             }
         });
+    }
+
+    private void loggerLogArcherNotFoundById(String id) {
+        LOGGER.error("Archer with id {} not found", id);
     }
 }

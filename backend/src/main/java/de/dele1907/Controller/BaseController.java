@@ -6,6 +6,8 @@ import io.javalin.Javalin;
 public abstract class BaseController<P> {
     private final IBaseService<P> service;
 
+    protected String PATH = "";
+
     public BaseController(IBaseService<P> service) {
         this.service = service;
     }

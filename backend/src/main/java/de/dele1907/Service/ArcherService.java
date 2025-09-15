@@ -17,11 +17,11 @@ public class ArcherService implements IBaseService<Archer> {
         return archerRepository.findAll();
     }
 
-    public Archer getEntityById(String id) {
+    public Archer getEntityById(String id) throws NoArchesFoundException {
         return archerRepository.findById(id).orElse(null);
     }
 
-    public boolean deleteEntityById(String id) {
+    public boolean deleteEntityById(String id) throws NoArchesFoundException {
         return archerRepository.deleteById(id);
     }
 
@@ -29,7 +29,7 @@ public class ArcherService implements IBaseService<Archer> {
         return archerRepository.save(archer);
     }
 
-    public boolean updateEntity(Archer entity) {
+    public boolean updateEntity(Archer entity) throws NoArchesFoundException {
         return archerRepository.update(entity);
     }
 }

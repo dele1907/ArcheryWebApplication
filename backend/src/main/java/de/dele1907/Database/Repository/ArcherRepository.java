@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class ArcherRepository implements IBaseRepository<Archer, String>{
-    private static final Logger logger = LoggerFactory.getLogger(ArcherRepository.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArcherRepository.class);
     // Dummy data
     private final List<Archer> archers = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     public List<Archer> findAll() throws NoArchesFoundException {
 
         if (archers.isEmpty()) {
-            logger.error("No archers found in the database.");
+            LOGGER.error("No archers found in the database.");
 
             throw new NoArchesFoundException();
         }
@@ -35,7 +35,7 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     }
 
     @Override
-    public Optional<Archer> findById(String id) {
+    public Optional<Archer> findById(String id) throws NoArchesFoundException {
         // Find archer by ID in the dummy data
         for (var archer : archers) {
             if (archer.getId().equals(id)) {
@@ -44,21 +44,22 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
         }
 
         // TODO Auto-generated method stub
-        return Optional.empty();
+        throw new NoArchesFoundException(id);
     }
 
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(String id) throws NoArchesFoundException {
         // Dummy implementation
         var removed = archers.removeIf(archer -> archer.getId().equals(id));
 
         if (removed) {
-            logger.info("Archer with ID {} has been removed.", id);
+            LOGGER.info("Archer with ID {} has been removed.", id);
+            return true;
         } else {
-            logger.error("No archer found with ID {} to remove.", id);
+            LOGGER.error("No archer found with ID {} to remove.", id);
         }
 
-        return removed;
+        throw new NoArchesFoundException(id);
         // TODO Auto-generated method stub
     }
 
@@ -70,19 +71,19 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
     }
 
     @Override
-    public boolean update(Archer entity) {
+    public boolean update(Archer entity) throws NoArchesFoundException {
         for (int i = 0; i < archers.size(); i++) {
 
             if (archers.get(i).getId().equals(entity.getId())) {
                 archers.set(i, entity);
-                logger.info("Archer with ID {} has been updated.", entity.getId());
+                LOGGER.info("Archer with ID {} has been updated.", entity.getId());
 
                 return true;
             }
         }
-        logger.error("No archer found with ID {} to update.", entity.getId());
+        LOGGER.error("No archer found with ID {} to update.", entity.getId());
 
-        return false;
+        throw new NoArchesFoundException(entity.getId());
     }
 
 }

@@ -27,7 +27,7 @@ export class ArcherCmd {
         if (response.ok) {
           responseSuccess = true;
         } else {
-          alert('Failed to delete shooter.');
+          alert('Failed to delete shooter, please try again!');
         }
       })
       .catch((error) => {
