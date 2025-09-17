@@ -1,7 +1,7 @@
 package de.dele1907.Service;
 
 import de.dele1907.Database.Repository.ArcherRepository;
-import de.dele1907.Model.Archer;
+import de.dele1907.Model.Shooter.Archer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

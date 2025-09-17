@@ -1,4 +1,4 @@
-package de.dele1907.Model;
+package de.dele1907.Model.Shooter;
 
 public abstract class Shooter {
     private final String id;

@@ -1,7 +1,7 @@
 package de.dele1907.Database.Repository;
 
 import de.dele1907.Exception.NoArchesFoundException;
-import de.dele1907.Model.Archer;
+import de.dele1907.Model.Shooter.Archer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

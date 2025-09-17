@@ -1,7 +1,7 @@
 package de.dele1907.Controller;
 
 import de.dele1907.Database.Repository.ArcherRepository;
-import de.dele1907.Model.Archer;
+import de.dele1907.Model.Shooter.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;

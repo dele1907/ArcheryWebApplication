@@ -2,7 +2,7 @@ package de.dele1907.Service;
 
 import de.dele1907.Database.Repository.ArcherRepository;
 import de.dele1907.Exception.NoArchesFoundException;
-import de.dele1907.Model.Archer;
+import de.dele1907.Model.Shooter.Archer;
 
 import java.util.List;
 

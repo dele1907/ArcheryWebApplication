@@ -1,6 +1,6 @@
 package de.dele1907.Controller;
 
-import de.dele1907.Model.Archer;
+import de.dele1907.Model.Shooter.Archer;
 import de.dele1907.Service.ArcherService;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
@@ -44,7 +44,7 @@ public class ArcherController extends BaseController<Archer>{
 
     private void registerCreateNewArcher(Javalin app) {
         app.post(this.PATH, ctx -> {
-            var result = ctx.bodyAsClass(de.dele1907.Model.Archer.class);
+            var result = ctx.bodyAsClass(Archer.class);
             var archer = new Archer(
                     UUID.randomUUID().toString(),
                     result.getName(),

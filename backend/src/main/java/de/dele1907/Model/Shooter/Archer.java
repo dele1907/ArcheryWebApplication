@@ -1,4 +1,4 @@
-package de.dele1907.Model;
+package de.dele1907.Model.Shooter;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
