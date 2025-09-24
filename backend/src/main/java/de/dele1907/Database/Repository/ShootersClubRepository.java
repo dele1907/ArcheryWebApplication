@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ShootersClubRepository implements IBaseRepository<ShootersClub, Integer>{
+public class ShootersClubRepository implements IBaseRepository<ShootersClub, String>{
     Logger LOGGER = LoggerFactory.getLogger(ShootersClubRepository.class);
 
     //Dummy Data
     private final List<ShootersClub> shootersClubs = new ArrayList<>();
 
     public ShootersClubRepository() {
-        shootersClubs.add(new ShootersClub(4711, "BSC"));
-        shootersClubs.add(new ShootersClub(815, "Gilde"));
+        shootersClubs.add(new ShootersClub("4711", "BSC"));
+        shootersClubs.add(new ShootersClub("815", "Gilde"));
     }
 
     @Override
@@ -29,9 +29,9 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Int
     }
 
     @Override
-    public Optional<ShootersClub> findById(Integer id) {
+    public Optional<ShootersClub> findById(String id) {
         for (var shootersClub : shootersClubs) {
-            if (shootersClub.clubNumber() == id) {
+            if (shootersClub.clubNumber().equals(id)) {
                 return Optional.of(shootersClub);
             }
         }
@@ -41,7 +41,7 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Int
     }
 
     @Override
-    public boolean deleteById(Integer id) {
+    public boolean deleteById(String id) {
         var removed = shootersClubs.remove(id);
 
         if (!removed) {
