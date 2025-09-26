@@ -50,9 +50,9 @@ public class ArcherController extends BaseController<ArcherDTO>{
                     result.name(),
                     result.firstName(),
                     result.clubId(),
-                    result.clubName(),
+                    "", // Club name is not provided when creating a new archer
                     result.bowType(),
-                    result.ageCategory(),
+                    "", // Age category is not provided when creating a new archer
                     result.passportNumber()
             );
             boolean success = this.getService().saveNewEntity(archer);

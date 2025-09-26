@@ -11,7 +11,9 @@ import dashboard_archer_overview from '@/assets/images/dashboard/dashboard_arche
         :image-src="dashboard_archer_overview"
         link="/shootersmanagment"
       />
-      <DashboardCard title="Ergebnisübersicht" image-src="" link="/results" />
+      <DashboardCard title="Vereinsverwaltung" image-src="" link="/clubs" />
+      <DashboardCard title="Turnierverwaltung" image-src="" link="/tournaments" />
+      <DashboardCard title="Ergebniserfassung" image-src="" link="/result-input" />
     </div>
   </div>
 </template>

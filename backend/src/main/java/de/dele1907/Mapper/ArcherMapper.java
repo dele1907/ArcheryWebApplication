@@ -15,7 +15,7 @@ public class ArcherMapper {
                 archer.getBowType(),
                 archer.getAgeCategory(),
                 archer.getPassportNumber()
-                );
+        );
     }
 
     public static Archer toEntity(ArcherDTO dto) {
@@ -27,6 +27,6 @@ public class ArcherMapper {
                 dto.bowType(),
                 dto.ageCategory(),
                 dto.passportNumber()
-                );
+        );
     }
 }

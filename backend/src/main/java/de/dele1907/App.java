@@ -24,6 +24,9 @@ public class App
         }).start(7070);
 
         GlobalExceptionHandler.registerExceptionHandlers(app);
-        new ArcherController(new ArcherService(new ArcherRepository(), new ClubService(new ShootersClubRepository()))).registerRoutes(app);
+        var clubService = new ClubService(new ShootersClubRepository());
+        var archerController = new ArcherController(new ArcherService(new ArcherRepository(), clubService));
+
+        archerController.registerRoutes(app);
     }
 }
