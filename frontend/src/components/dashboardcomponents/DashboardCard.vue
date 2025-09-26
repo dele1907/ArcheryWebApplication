@@ -18,17 +18,16 @@ const onCardClicked = () => {
 </script>
 
 <template>
-  <v-card @click="onCardClicked" width="500" height="300" class="ma-4">
-    <v-img :src="imageSrc"></v-img>
-    <v-card-title class="text-center">{{ title }}</v-card-title>
-  </v-card>
+  <v-card @click="onCardClicked" width="500" :image="imageSrc" :title="title" height="300" class="ma-4" />
 </template>
 
 <style scoped>
 .v-card {
   cursor: pointer;
+  display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: flex-start;
+  color: black;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
