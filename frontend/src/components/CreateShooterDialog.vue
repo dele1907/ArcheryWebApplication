@@ -13,11 +13,11 @@ const newArcher: Archer = {
   id: '',
   firstName: '',
   name: '',
-  clubNumber: 0,
+  clubId: '',
   passportNumber: 0,
   ageCategory: '',
   bowType: '',
-  club: '',
+  clubName: '',
 };
 
 const archer = ref<Archer>(newArcher);
@@ -27,20 +27,20 @@ function resetFormInputs(): void {
     id: '',
     firstName: '',
     name: '',
-    clubNumber: 0,
+    clubId: '0',
     passportNumber: 0,
     ageCategory: '',
     bowType: '',
-    club: '',
+    clubName: '',
   };
 }
 
 function getNecessaryTextFields(): string[] {
-  return [archer.value.firstName, archer.value.name, archer.value.bowType];
+  return [archer.value.firstName, archer.value.name, archer.value.clubId, archer.value.bowType];
 }
 
 function getNecessaryNumberFields(): number[] {
-  return [archer.value.clubNumber, archer.value.passportNumber];
+  return [archer.value.passportNumber];
 }
 function getInputFieldsAreValid(): boolean {
   if (getNecessaryTextFields().some((field) => field.trim() === '')) {
@@ -77,11 +77,11 @@ function getArcherApiObject(): Archer {
     id: '',
     firstName: archer.value.firstName,
     name: archer.value.name,
-    clubNumber: archer.value.clubNumber,
+    clubId: archer.value.clubId,
     passportNumber: archer.value.passportNumber,
     ageCategory: 'Altersklasse',
     bowType: archer.value.bowType,
-    club: 'Beispiel',
+    clubName: 'Beispiel',
   };
 }
 
@@ -126,13 +126,12 @@ const onCancelButton = () => {
             </v-col>
 
             <v-col cols="12" md="6" sm="6">
-              <v-number-input
+              <v-text-field
                 label="Vereinsnummer *"
-                type="number"
-                v-model="archer.clubNumber"
+                v-model="archer.clubId"
                 controlVariant="hidden"
                 required
-              ></v-number-input>
+              ></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6" sm="6">

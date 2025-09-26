@@ -12,11 +12,11 @@ const initialArcher = {
   id: props.archer.id,
   firstName: props.archer.firstName,
   name: props.archer.name,
-  clubNumber: props.archer.clubNumber,
+  clubId: props.archer.clubId,
   passportNumber: props.archer.passportNumber,
   ageCategory: props.archer.ageCategory,
   bowType: props.archer.bowType,
-  club: props.archer.club,
+  clubName: props.archer.clubName,
 };
 
 const editedArcher = ref<Archer>(initialArcher);
@@ -64,13 +64,12 @@ const onCancelButton = () => {
             </v-col>
 
             <v-col cols="12" md="6" sm="6">
-              <v-number-input
+              <v-text-field
                 label="Vereinsnummer *"
-                v-model="editedArcher.clubNumber"
-                type="number"
+                v-model="editedArcher.clubId"
                 controlVariant="hidden"
                 required
-              ></v-number-input>
+              ></v-text-field>
             </v-col>
 
             <v-col cols="12" md="6" sm="6">
@@ -111,7 +110,10 @@ const onCancelButton = () => {
           <v-btn
             color="primary"
             icon="fa-save"
-            @click="props.onShooterUpdated(editedArcher)"
+            @click="
+              props.onShooterUpdated(editedArcher);
+              dialog = false;
+            "
           ></v-btn>
         </v-card-actions>
       </v-card>

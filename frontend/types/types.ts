@@ -1,8 +1,8 @@
 export type Archer = {
   name: string,
   firstName: string,
-  club: string,
-  clubNumber: number,
+  clubId: string,
+  clubName: string,
   id: string,
   bowType: string,
   ageCategory: string,
@@ -12,7 +12,8 @@ export type Archer = {
 export type ArcherDTO = {
   name: string,
   firstName: string,
-  clubNumber: number,
+  clubId: number,
   bowType: string,
   passportNumber: number,
+  birthDate: string,
 }
