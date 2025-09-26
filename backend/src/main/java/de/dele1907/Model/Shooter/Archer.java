@@ -14,12 +14,11 @@ public class Archer extends Shooter {
             @JsonProperty("id") String id,
             @JsonProperty("name") String name,
             @JsonProperty("firstName") String firstName,
-            @JsonProperty("club") String club,
-            @JsonProperty("clubNumber") int clubNumber,
+            @JsonProperty("clubId") String clubId,
             @JsonProperty("bowType") String bowType,
             @JsonProperty("ageCategory") String ageCategory,
             @JsonProperty("passportNumber") int passportNumber) {
-        super(id, name, firstName, club, clubNumber, passportNumber);
+        super(id, name, firstName, clubId, passportNumber);
         this.bowType = bowType;
         this.ageCategory = ageCategory;
     }

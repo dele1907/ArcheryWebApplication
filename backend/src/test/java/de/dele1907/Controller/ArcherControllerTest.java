@@ -1,8 +1,10 @@
 package de.dele1907.Controller;
 
 import de.dele1907.Database.Repository.ArcherRepository;
-import de.dele1907.Model.Shooter.Archer;
+import de.dele1907.Database.Repository.ShootersClubRepository;
+import de.dele1907.Dto.ArcherDTO;
 import de.dele1907.Service.ArcherService;
+import de.dele1907.Service.ClubService;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,19 +19,19 @@ class ArcherControllerTest {
 
     @BeforeAll
     static void setup() {
-        mockService = new ArcherService(new ArcherRepository()) {
+        mockService = new ArcherService(new ArcherRepository(), new ClubService(new ShootersClubRepository())) {
             @Override
-            public List<Archer> getAllEntities() {
+            public List<ArcherDTO> getAllEntities() {
                 return List.of(
-                        new Archer("4711","Doe", "John", "TestClub", 42, "Recurve", "Adult", 4711),
-                        new Archer("0815","Smith", "Jane", "AnotherClub", 99, "Compound", "Junior", 815)
+                        new ArcherDTO("4711","Doe", "John", "42", "BSC","Recurve", "Adult", 4711),
+                        new ArcherDTO("0815","Smith", "Jane", "99",  "Gilde","Compound", "Junior", 815)
                 );
             }
 
             @Override
-            public Archer getEntityById(String id) {
+            public ArcherDTO getEntityById(String id) {
                 if (id.equals("4711")) {
-                    return new Archer("4711","Napp", "Karl", "Beispielverein", 1234, "Recurve", "Adult", 4711);
+                    return new ArcherDTO("4711","Napp", "Karl", "1234","BSC", "Recurve", "Adult", 4711);
                 }
                 return null;
             }
@@ -87,8 +89,8 @@ class ArcherControllerTest {
                 {
                     "name": "Doe",
                     "firstName": "Jane",
-                    "club": "NewClub",
-                    "clubNumber": 1234,
+                    "clubId": 1234,
+                    "clubName": "NewClub",                
                     "bowType": "Recurve",
                     "ageCategory": "Adult",
                     "passportNumber": 5678
@@ -110,8 +112,8 @@ class ArcherControllerTest {
                     "id": "4711",
                     "name": "Nappos",
                     "firstName": "Karlos",
-                    "club": "Beispielverein",
-                    "clubNumber": 1234,
+                    "clubId": 1234,
+                    "clubName": "BSC",
                     "bowType": "Recurve",
                     "ageCategory": "Adult",
                     "passportNumber": 4711

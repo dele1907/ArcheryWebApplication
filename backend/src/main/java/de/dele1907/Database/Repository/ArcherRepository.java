@@ -16,8 +16,8 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
 
     public ArcherRepository() {
         // Dummy data
-        archers.add(new Archer("4711", "Napp", "Karl", "Beispielverein", 1234, "Recurve", "Adult", 4711));
-        archers.add(new Archer("0815","Mustermann", "Max", "Musterverein", 5678, "Compound", "Junior", 815));
+        archers.add(new Archer("4711", "Napp", "Karl", "1234", "Recurve", "Adult", 4711));
+        archers.add(new Archer("0815","Mustermann", "Max", "5678", "Compound", "Junior", 815));
     }
 
     @Override

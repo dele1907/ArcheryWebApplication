@@ -31,7 +31,7 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Str
     @Override
     public Optional<ShootersClub> findById(String id) {
         for (var shootersClub : shootersClubs) {
-            if (shootersClub.clubNumber().equals(id)) {
+            if (shootersClub.clubId().equals(id)) {
                 return Optional.of(shootersClub);
             }
         }
@@ -57,7 +57,7 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Str
 
     @Override
     public boolean save(ShootersClub entity) {
-        LOGGER.info("Saving shooters club {}", entity.clubNumber());
+        LOGGER.info("Saving shooters club {}", entity.clubId());
 
         return shootersClubs.add(entity);
     }
@@ -65,7 +65,7 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Str
     @Override
     public boolean update(ShootersClub entity) {
         for (int i = 0; i < shootersClubs.size(); i++) {
-            if (shootersClubs.get(i).clubNumber() == entity.clubNumber()) {
+            if (shootersClubs.get(i).clubId().equals(entity.clubId())) {
                 shootersClubs.set(i, entity);
                 LOGGER.info("Updated shooters club {}", entity.clubName());
 

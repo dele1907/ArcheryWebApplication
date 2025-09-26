@@ -4,17 +4,15 @@ public abstract class Shooter {
     private final String id;
     private final String name;
     private final String firstName;
-    private final String club;
-    private final int clubNumber;
+    private final String clubId;
     private final int passportNumber;
 
 
-    public Shooter(String id, String name, String firstName, String club, int clubNumber, int passportNumber) {
+    public Shooter(String id, String name, String firstName, String clubId, int passportNumber) {
         this.id = id;
         this.name = name;
         this.firstName = firstName;
-        this.club = club;
-        this.clubNumber = clubNumber;
+        this.clubId = clubId;
         this.passportNumber = passportNumber;
     }
 
@@ -30,12 +28,8 @@ public abstract class Shooter {
         return firstName;
     }
 
-    public String getClub() {
-        return club;
-    }
-
-    public int getClubNumber() {
-        return clubNumber;
+    public String getClubId() {
+        return clubId;
     }
 
     public int getPassportNumber() {
