@@ -12,12 +12,10 @@ const props = defineProps<{
 <template>
   <div class="shooter-info-card-wrapper">
     <v-card width="500" height="300" class="ma-4 shooter-info-card">
-      <v-card-title class="text-center"
-        >{{ props.shooter.name }}, {{ props.shooter.firstName }}</v-card-title
-      >
       <v-card-text class="text-center ma-16">
-        <p><strong>ID:</strong> {{ props.shooter.id }}</p>
-        <p><strong>Verein:</strong> {{ props.shooter.clubName }}</p>
+        <h2 class="ma-4">{{ props.shooter.name }}, {{ props.shooter.firstName }}</h2>
+        <p><strong>Passnummer:</strong> {{ props.shooter.passportNumber }}</p>
+        <p><strong>Vereinsnummer:</strong> {{ props.shooter.clubId }}</p>
         <p><strong>Altersklasse:</strong> {{ props.shooter.ageCategory }}</p>
         <p><strong>Disziplin:</strong> {{ props.shooter.bowType }}</p>
       </v-card-text>
