@@ -17,7 +17,7 @@ const props = defineProps<{
       >
       <v-card-text class="text-center ma-16">
         <p><strong>ID:</strong> {{ props.shooter.id }}</p>
-        <p><strong>Verein:</strong> {{ props.shooter.club }}</p>
+        <p><strong>Verein:</strong> {{ props.shooter.clubName }}</p>
         <p><strong>Altersklasse:</strong> {{ props.shooter.ageCategory }}</p>
         <p><strong>Disziplin:</strong> {{ props.shooter.bowType }}</p>
       </v-card-text>
