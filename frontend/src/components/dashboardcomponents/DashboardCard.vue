@@ -30,7 +30,7 @@ const onCardClicked = () => {
   color: black;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 4px rgb(9, 149, 206);
     transform: translateY(-2px);
     transition: all 0.3s ease;
   }
