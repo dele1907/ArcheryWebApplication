@@ -18,7 +18,14 @@ const onCardClicked = () => {
 </script>
 
 <template>
-  <v-card @click="onCardClicked" width="500" :image="imageSrc" :title="title" height="300" class="ma-4" />
+  <v-card
+    @click="onCardClicked"
+    width="500"
+    :image="imageSrc"
+    :title="title"
+    height="300"
+    class="ma-4"
+  />
 </template>
 
 <style scoped>

@@ -84,7 +84,12 @@ const onCancelButton = () => {
             </v-col>
 
             <v-col cols="12" md="12" sm="6">
-              <v-text-field label="Geburtsadatum *" type="date" v-model="editedArcher.birthDate" required></v-text-field>
+              <v-text-field
+                label="Geburtsadatum *"
+                type="date"
+                v-model="editedArcher.birthDate"
+                required
+              ></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="12">
