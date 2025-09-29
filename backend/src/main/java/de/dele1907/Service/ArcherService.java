@@ -1,12 +1,14 @@
 package de.dele1907.Service;
 
 import de.dele1907.Database.Repository.ArcherRepository;
-import de.dele1907.Database.Repository.ShootersClubRepository;
 import de.dele1907.Dto.ArcherDTO;
 import de.dele1907.Exception.NoArchesFoundException;
 import de.dele1907.Mapper.ArcherMapper;
 
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
 
 public class ArcherService implements IBaseService<ArcherDTO> {
     private final ArcherRepository archerRepository;
@@ -23,18 +25,30 @@ public class ArcherService implements IBaseService<ArcherDTO> {
         return archers.stream()
                 .map(archer -> {
                     var club = clubService.getEntityById(archer.getClubId());
-                    return ArcherMapper.toDTO(archer, club);
+                    return ArcherMapper.toDTO(archer, club, getAgeCategoryByBirthdate(archer.getBirthDate()));
                 }).toList();
+    }
+
+    private String getAgeCategoryByBirthdate(Date birthdate) {
+        LocalDate birthDateLocalDate = birthdate.toLocalDate();
+
+        int age = Period.between(birthDateLocalDate, LocalDate.now()).getYears();
+
+        NavigableMap<Integer, String> ageCategories = new TreeMap<>();
+        ageCategories.put(12, "Schüler");
+        ageCategories.put(18, "Jugend");
+        ageCategories.put(20, "Junioren");
+        ageCategories.put(54, "Erwachsene");
+        ageCategories.put(Integer.MAX_VALUE, "Senioren");
+
+        return ageCategories.ceilingEntry(age).getValue();
     }
 
     public ArcherDTO getEntityById(String id) throws NoArchesFoundException {
         var archer = archerRepository.findById(id).orElse(null);
+        var club = clubService.getEntityById(archer.getClubId());
 
-        if (archer == null) {
-            throw new NoArchesFoundException("No archer found with id: " + id);
-        }
-
-        return ArcherMapper.toDTO(archer, new ClubService(new ShootersClubRepository()).getEntityById(archer.getClubId()));
+        return ArcherMapper.toDTO(archer, club, getAgeCategoryByBirthdate(archer.getBirthDate()));
     }
 
     public boolean deleteEntityById(String id) throws NoArchesFoundException {

@@ -9,6 +9,9 @@ import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,15 +26,15 @@ class ArcherControllerTest {
             @Override
             public List<ArcherDTO> getAllEntities() {
                 return List.of(
-                        new ArcherDTO("4711","Doe", "John", "42", "BSC","Recurve", "Adult", 4711),
-                        new ArcherDTO("0815","Smith", "Jane", "99",  "Gilde","Compound", "Junior", 815)
+                        new ArcherDTO("4711","Doe", "John", "42", "BSC","Recurve", Date.valueOf(LocalDate.of(1970, 1, 1)), "Adult", 4711),
+                        new ArcherDTO("0815","Smith", "Jane", "99",  "Gilde","Compound", Date.valueOf(LocalDate.of(1970, 1, 1)), "Junior", 815)
                 );
             }
 
             @Override
             public ArcherDTO getEntityById(String id) {
                 if (id.equals("4711")) {
-                    return new ArcherDTO("4711","Napp", "Karl", "1234","BSC", "Recurve", "Adult", 4711);
+                    return new ArcherDTO("4711","Napp", "Karl", "1234","BSC", "Recurve", Date.valueOf(LocalDate.of(1970, 1, 1)), "Adult", 4711);
                 }
                 return null;
             }
@@ -92,6 +95,7 @@ class ArcherControllerTest {
                     "clubId": 1234,
                     "clubName": "NewClub",                
                     "bowType": "Recurve",
+                    "birthDate": "1970-01-01",
                     "ageCategory": "Adult",
                     "passportNumber": 5678
                 }
@@ -115,6 +119,7 @@ class ArcherControllerTest {
                     "clubId": 1234,
                     "clubName": "BSC",
                     "bowType": "Recurve",
+                    "birthDate": "1970-01-01",
                     "ageCategory": "Adult",
                     "passportNumber": 4711
                 }

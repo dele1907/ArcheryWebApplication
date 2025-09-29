@@ -5,6 +5,7 @@ export type Archer = {
   clubName: string,
   id: string,
   bowType: string,
+  birthDate: string,
   ageCategory: string,
   passportNumber: number,
 }

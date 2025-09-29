@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Date;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Archer extends Shooter {
     private final String bowType;
-    private final String ageCategory;
+    private final Date birthdate;
 
     @JsonCreator
     public Archer(
@@ -16,23 +18,23 @@ public class Archer extends Shooter {
             @JsonProperty("firstName") String firstName,
             @JsonProperty("clubId") String clubId,
             @JsonProperty("bowType") String bowType,
-            @JsonProperty("ageCategory") String ageCategory,
+            @JsonProperty("birthDate") Date birthDate,
             @JsonProperty("passportNumber") int passportNumber) {
         super(id, name, firstName, clubId, passportNumber);
         this.bowType = bowType;
-        this.ageCategory = ageCategory;
+        this.birthdate = birthDate;
     }
 
     public String getBowType() {
         return bowType;
     }
 
-    public String getAgeCategory() {
-        return ageCategory;
+    public Date getBirthDate() {
+        return birthdate;
     }
 
     @Override
     public String toString() {
-        return "Archer: name= " + getName() + ", bowType= " + bowType + ", category= " + ageCategory;
+        return "Archer: name= " + getName() + ", bowType= " + bowType + ", category= " + birthdate.toString();
     }
 }

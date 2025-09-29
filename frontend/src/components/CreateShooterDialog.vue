@@ -15,6 +15,7 @@ const newArcher: Archer = {
   name: '',
   clubId: '',
   passportNumber: 0,
+  birthDate: '',
   ageCategory: '',
   bowType: '',
   clubName: '',
@@ -29,6 +30,7 @@ function resetFormInputs(): void {
     name: '',
     clubId: '0',
     passportNumber: 0,
+    birthDate: '',
     ageCategory: '',
     bowType: '',
     clubName: '',
@@ -79,6 +81,7 @@ function getArcherApiObject(): Archer {
     name: archer.value.name,
     clubId: archer.value.clubId,
     passportNumber: archer.value.passportNumber,
+    birthDate: archer.value.birthDate,
     ageCategory: 'Altersklasse',
     bowType: archer.value.bowType,
     clubName: 'Beispiel',
@@ -145,7 +148,7 @@ const onCancelButton = () => {
             </v-col>
 
             <v-col cols="12" md="12" sm="6">
-              <v-text-field label="Geburtsadatum *" type="date" required></v-text-field>
+              <v-text-field label="Geburtsadatum *" type="date" v-model="archer.birthDate" required></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="12">

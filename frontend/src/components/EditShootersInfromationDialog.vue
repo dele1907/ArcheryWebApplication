@@ -14,6 +14,7 @@ const initialArcher = {
   name: props.archer.name,
   clubId: props.archer.clubId,
   passportNumber: props.archer.passportNumber,
+  birthDate: new Date(props.archer.birthDate).toISOString().split('T')[0],
   ageCategory: props.archer.ageCategory,
   bowType: props.archer.bowType,
   clubName: props.archer.clubName,
@@ -83,7 +84,7 @@ const onCancelButton = () => {
             </v-col>
 
             <v-col cols="12" md="12" sm="6">
-              <v-text-field label="Geburtsadatum *" type="date" required></v-text-field>
+              <v-text-field label="Geburtsadatum *" type="date" v-model="editedArcher.birthDate" required></v-text-field>
             </v-col>
 
             <v-col cols="12" sm="12">

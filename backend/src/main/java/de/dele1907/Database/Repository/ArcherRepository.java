@@ -5,6 +5,8 @@ import de.dele1907.Model.Shooter.Archer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +18,8 @@ public class ArcherRepository implements IBaseRepository<Archer, String>{
 
     public ArcherRepository() {
         // Dummy data
-        archers.add(new Archer("4711", "Napp", "Karl", "1234", "Recurve", "Adult", 4711));
-        archers.add(new Archer("0815","Mustermann", "Max", "5678", "Compound", "Junior", 815));
+        archers.add(new Archer("4711", "Napp", "Karl", "1234", "Recurve", Date.valueOf(LocalDate.of(1950, 8, 5)), 4711));
+        archers.add(new Archer("0815","Mustermann", "Max", "5678", "Compound", Date.valueOf(LocalDate.of(1997, 8, 5)), 815));
     }
 
     @Override

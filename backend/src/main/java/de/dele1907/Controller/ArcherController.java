@@ -25,87 +25,89 @@ public class ArcherController extends BaseController<ArcherDTO>{
     }
 
     private void registerGetAllArchers(Javalin app) {
-            app.get(this.PATH , ctx -> ctx.json(this.getService().getAllEntities()));
+        try {
+            app.get(this.PATH, ctx -> ctx.json(this.getService().getAllEntities()));
+        } catch (Exception e) {
+            LOGGER.error("Error retrieving archers: {}", e.getMessage());
+            app.get(this.PATH, ctx -> ctx.status(500).result("Error retrieving archers"));
+        }
     }
 
     private void registerGetArcherById(Javalin app) {
-        app.get(this.PATH + "/{id}", ctx -> {
-            String id = ctx.pathParam("id");
-            var archer = this.getService().getEntityById(id);
-
-            if (archer != null) {
+        try {
+            app.get(this.PATH + "/{id}", ctx -> {
+                String id = ctx.pathParam("id");
+                var archer = this.getService().getEntityById(id);
                 ctx.json(archer);
-            } else {
-                ctx.status(404).result("Archer not found");
-                loggerLogArcherNotFoundById(id);
-            }
-        });
+            });
+        } catch (Exception e) {
+            LOGGER.error("Error retrieving archer by ID: {}", e.getMessage());
+            app.get(this.PATH + "/{id}", ctx -> ctx.status(500).result("Error retrieving archer by ID"));
+        }
     }
 
     private void registerCreateNewArcher(Javalin app) {
-        app.post(this.PATH, ctx -> {
-            var result = ctx.bodyAsClass(ArcherDTO.class);
-            var archer = new ArcherDTO(
-                    UUID.randomUUID().toString(),
-                    result.name(),
-                    result.firstName(),
-                    result.clubId(),
-                    "", // Club name is not provided when creating a new archer
-                    result.bowType(),
-                    "", // Age category is not provided when creating a new archer
-                    result.passportNumber()
-            );
-            boolean success = this.getService().saveNewEntity(archer);
+        try {
+            app.post(this.PATH, ctx -> {
+                var result = ctx.bodyAsClass(ArcherDTO.class);
+                var archer = new ArcherDTO(
+                        UUID.randomUUID().toString(),
+                        result.name(),
+                        result.firstName(),
+                        result.clubId(),
+                        "", // Club name is not provided when creating a new archer
+                        result.bowType(),
+                        result.birthDate(),
+                        "", // Age category is not provided when creating a new archer
+                        result.passportNumber()
+                );
+                this.getService().saveNewEntity(archer);
 
-            if (success) {
                 ctx.status(201).result("Archer created");
-            } else {
-                ctx.status(500).result("Failed to create archer");
-                LOGGER.error("Failed to create archer");
-            }
-        });
+            });
+        } catch (Exception e) {
+            LOGGER.error("Error creating new archer: {}", e.getMessage());
+            app.post(this.PATH, ctx -> ctx.status(500).result("Error creating new archer"));
+        }
     }
 
     private void registerDeleteArcher(Javalin app) {
-        app.delete(this.PATH + "/{id}", ctx -> {
-            String id = ctx.pathParam("id");
-            boolean success = this.getService().deleteEntityById(id);
+        try {
+            app.delete(this.PATH + "/{id}", ctx -> {
+                String id = ctx.pathParam("id");
+                this.getService().deleteEntityById(id);
 
-            if (success) {
                 ctx.status(200).result("Archer deleted");
-            } else {
-                ctx.status(404).result("Archer not found");
-                loggerLogArcherNotFoundById(id);
-            }
-        });
+            });
+        } catch (Exception e) {
+            LOGGER.error("Error deleting archer: {}", e.getMessage());
+            app.delete(this.PATH + "/{id}", ctx -> ctx.status(500).result("Error deleting archer"));
+        }
     }
 
     private void registerUpdateArcher(Javalin app) {
-        app.put(this.PATH + "/{id}", ctx -> {
-            String id = ctx.pathParam("id");
-            var result = ctx.bodyAsClass(ArcherDTO.class);
-            var archer = new ArcherDTO(
-                    id,
-                    result.name(),
-                    result.firstName(),
-                    result.clubId(),
-                    result.clubName(),
-                    result.bowType(),
-                    result.ageCategory(),
-                    result.passportNumber()
-            );
-            boolean success = this.getService().updateEntity(archer);
+        try {
+            app.put(this.PATH + "/{id}", ctx -> {
+                String id = ctx.pathParam("id");
+                var result = ctx.bodyAsClass(ArcherDTO.class);
+                var archer = new ArcherDTO(
+                        id,
+                        result.name(),
+                        result.firstName(),
+                        result.clubId(),
+                        "",
+                        result.bowType(),
+                        result.birthDate(),
+                        "",
+                        result.passportNumber()
+                );
+                this.getService().updateEntity(archer);
 
-            if (success) {
                 ctx.status(200).result("Archer updated");
-            } else {
-                ctx.status(404).result("Archer not found");
-                loggerLogArcherNotFoundById(id);
-            }
-        });
-    }
-
-    private void loggerLogArcherNotFoundById(String id) {
-        LOGGER.error("Archer with id {} not found", id);
+            });
+        } catch (Exception e) {
+            LOGGER.error("Error updating archer: {}", e.getMessage());
+            app.put(this.PATH + "/{id}", ctx -> ctx.status(500).result("Error updating archer"));
+        }
     }
 }
