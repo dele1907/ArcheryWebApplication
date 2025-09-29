@@ -10,6 +10,11 @@ export type Archer = {
   passportNumber: number,
 }
 
+export type Club = {
+  clubId: string,
+  clubName: string,
+}
+
 export type ArcherDTO = {
   name: string,
   firstName: string,

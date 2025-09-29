@@ -9,7 +9,7 @@ import dashboard_archer_overview from '@/assets/images/dashboard/dashboard_arche
       <DashboardCard
         title="Schützenverwaltung"
         :image-src="dashboard_archer_overview"
-        link="/shootersmanagment"
+        link="/shooters"
       />
       <DashboardCard title="Vereinsverwaltung" image-src="" link="/clubs" />
       <DashboardCard title="Turnierverwaltung" image-src="" link="/tournaments" />

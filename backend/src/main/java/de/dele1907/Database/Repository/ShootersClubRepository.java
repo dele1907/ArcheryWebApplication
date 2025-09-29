@@ -42,7 +42,7 @@ public class ShootersClubRepository implements IBaseRepository<ShootersClub, Str
 
     @Override
     public boolean deleteById(String id) {
-        var removed = shootersClubs.remove(id);
+        var removed = shootersClubs.removeIf( club -> club.clubId().equals(id));
 
         if (!removed) {
             LOGGER.info("No shooters club found to delete");

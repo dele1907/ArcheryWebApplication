@@ -1,6 +1,7 @@
 package de.dele1907;
 
 import de.dele1907.Controller.ArcherController;
+import de.dele1907.Controller.ClubController;
 import de.dele1907.Database.Repository.ArcherRepository;
 import de.dele1907.Database.Repository.ShootersClubRepository;
 import de.dele1907.Exception.GlobalExceptionHandler;
@@ -24,9 +25,18 @@ public class App
         }).start(7070);
 
         GlobalExceptionHandler.registerExceptionHandlers(app);
+
+        //#region Services
         var clubService = new ClubService(new ShootersClubRepository());
-        var archerController = new ArcherController(new ArcherService(new ArcherRepository(), clubService));
+        var archerService = new ArcherService(new ArcherRepository(), clubService);
+        //#endregion Services
+
+        //#region Controllers
+        var archerController = new ArcherController(archerService);
+        var clubController = new ClubController(clubService);
+        //#endregion Controllers
 
         archerController.registerRoutes(app);
+        clubController.registerRoutes(app);
     }
 }

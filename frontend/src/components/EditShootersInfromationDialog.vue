@@ -23,7 +23,6 @@ const initialArcher = {
 const editedArcher = ref<Archer>(initialArcher);
 
 const dialog = shallowRef(false);
-//TODO make the form functional and prefill with existing data
 
 const onCancelButton = () => {
   dialog.value = false;
@@ -43,7 +42,7 @@ const onCancelButton = () => {
         ></v-btn>
       </template>
 
-      <v-card prepend-icon="fa-user" title="Neuen Schützen anlegen">
+      <v-card prepend-icon="fa-user" title="Schütze bearbeiten">
         <v-card-text>
           <v-row dense>
             <v-col cols="12" md="6" sm="6">
